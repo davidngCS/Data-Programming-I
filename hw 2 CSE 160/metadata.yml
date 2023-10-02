@@ -1,0 +1,12 @@
+---
+:id: 156588059
+:submitters:
+- :name: David Ng
+  :email: davidng8@uw.edu
+:created_at: !ruby/object:ActiveSupport::TimeWithZone
+  utc: 2023-01-22 09:12:00.534998000 Z
+  zone: !ruby/object:ActiveSupport::TimeZone
+    name: America/Los_Angeles
+  time: 2023-01-22 01:12:00.534998000 Z
+:status: processed
+:score: 24.0

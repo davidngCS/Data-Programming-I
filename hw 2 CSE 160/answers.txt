@@ -1,0 +1,133 @@
+Name: David Ng
+CSE 160
+Homework 2
+
+For each problem that requires a written answer, write (or copy-and-paste)
+your answers in this file.  When you are done, you should have replaced all
+the ellipses (the three dots) with your answers.
+
+At the end, you will turn in this file and your modified
+dna_analysis.py program.
+
+
+Problem 0: Setup
+
+...
+
+Problem 1: Remove some lines
+When removing gc_count = 0, there was error produced, as gc_count is not defined, so therefore cannot process
+When commenting out "nucleotides = filename_to_string(file_name), nucleotide isn't defined because since nucleotide is a variable
+...
+
+Problem 2: Compute AT Content
+(CSE160) ng@dng homework2 % python3 dna_analysis.py data/sample_1.
+fastq
+
+GC-content: 0.4302926296296296
+AT-content: 0.5697073703703703
+
+code:
+for base in nucleotides:
+    total_count = total_count + 1
+
+    # OK to change this code!
+    if base == 'C' or base == 'G':
+        gc_count = gc_count + 1
+    if base == 'A' or 'T':
+        at_count = at_count + 1
+...
+
+Problem 3: Count nucleotides
+(CSE160) ng@dng homework2 % python3 dna_analysis.py data/sample_1.
+fastq
+GC-content: 0.4302926296296296
+AT-content: 0.5697073703703703
+G count: 5738773
+C count: 5879128
+A count: 7701287
+T count: 7661547
+
+code:
+c_count = 0
+g_count = 0
+a_count = 0
+t_count = 0
+all_counts = 0
+for base in nucleotides:
+    if base == 'C':
+        c_count = c_count + 1
+    elif base == 'G':
+        g_count = g_count + 1
+    elif base == 'A':
+        a_count = a_count + 1
+    elif base == 'T':
+        t_count = t_count + 1
+    all_counts = c_count + g_count + a_count + t_count
+
+
+gc_content = float(gc_count) / total_count
+at_content = float((abs(at_count - gc_count)/total_count))
+len_nuc = len(nucleotides)
+...
+
+Problem 4: Sanity-check the data ** stuck
+The quantities that produced different results was GC and AT contents, 
+instead of using total_count variable for the denominator,
+I used the count of A+C+G+T and the output of the content was exact.
+test-high-gc-1.fastq produced different results maybe because there could be other
+nucleotides that aren't A+T+G+C.
+...
+
+Problem 5: Compute the AT/GC ratio
+(CSE160) ng@dng homework2 % python3 dna_analysis.py data/sample_1.
+fastq
+GC-content: 0.4302926296296296
+AT-content: 0.5697073703703703
+G count: 5738773
+C count: 5879128
+A count: 7701287
+T count: 7661547
+Sum of G+C+A+T counts: 26980735
+Total count: 27000000
+Length of nucleotides: 27000000
+AT/GC Ratio: 1.3223416174746196
+
+code:
+at_total = a_count + t_count
+gc_total = g_count + c_count
+nuc_ratio = at_total / gc_total
+print("AT/GC Ratio:, nuc_ratio)
+...
+
+Problem 6: Categorize organisms
+(CSE160) ng@dng homework2 % python3 dna_analysis.py data/sample_1.
+fastq
+GC-content: 0.4302926296296296
+AT-content: 0.5697073703703703
+G count: 5738773
+C count: 5879128
+A count: 7701287
+T count: 7661547
+Sum of G+C+A+T counts: 26980735
+Total count: 27000000
+Length of nucleotides: 27000000
+AT/GC Ratio: 1.3223416174746196
+GC Classification: moderate GC content
+
+code:
+def classify(gc_content):
+    if gc_content > 0.56:
+        classification = "high GC content"
+    elif gc_content < 0.36:
+        classification = "low GC content"
+    else:
+        classification = "moderate GC content"
+
+    return classification
+print('GC Classification:', classify(gc_count))
+...
+
+Collaboration: None
+
+...
+
